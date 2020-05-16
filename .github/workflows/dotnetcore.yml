@@ -23,4 +23,4 @@ jobs:
       name: Upload artifact.
       with:
         name: DNSPropChecker
-        path: ./out
+        path: ./publish
