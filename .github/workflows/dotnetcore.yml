@@ -18,4 +18,9 @@ jobs:
       with:
         dotnet-version: 3.1.101
     - name: Build Release
-      run: dotnet publish -c Release -r win-x64 --framework netcoreapp3.1 --self-contained true -p:PublishSingleFile=true -p:PublishTrimmed=true
+      run: dotnet publish -c Release -r win-x64 --framework netcoreapp3.1 --self-contained true -p:PublishSingleFile=true -p:PublishTrimmed=true -o ./publish
+    - uses: actions/upload-artifact@master
+      name: Upload artifact.
+      with:
+        name: DNSPropChecker
+        path: ./out
