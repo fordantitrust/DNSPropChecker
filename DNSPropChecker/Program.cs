@@ -39,20 +39,35 @@ namespace DNSPropChecker
             // Type Query Type: A or CNAME
             Console.WriteLine("Enter Query Type [A or CNAME]:");
 
-            string queryType = Console.ReadLine();           
+            string queryType = Console.ReadLine();
 
-            // Process
+            // Check valid Query Type
+            if (!(queryType.Equals("A", StringComparison.OrdinalIgnoreCase) ||
+                queryType.Equals("CNAME", StringComparison.OrdinalIgnoreCase) ))
+            {
+                Console.WriteLine("Invalid - Query Type: exit!");
+                Environment.Exit(0);
+            }
+
+            // Process 
             foreach (var dns in dnsList)
             {
-                Console.WriteLine("Provider: [" + dns.GetSection("Country").Value + "]" + dns.GetSection("Name").Value +  " = " + dns.GetSection("IP").Value);
+                Console.WriteLine("Provider: [" + dns.GetSection("Country").Value + "]" 
+                    + dns.GetSection("Name").Value +  " = " 
+                    + dns.GetSection("IP").Value);
 
                 IPAddress nameServerIpaddress = IPAddress.Parse(dns.GetSection("IP").Value);
 
+                // Assign Name Server to lookup
                 var options = new LookupClientOptions(nameServerIpaddress);
+
+                // Query timeout 2 seconds
                 options.Timeout = TimeSpan.FromSeconds(2);
 
+                // Init lookup
                 var lookup = new LookupClient(options);
 
+                // Process A Record
                 if (queryType.Equals("A", StringComparison.OrdinalIgnoreCase))
                 {
                     try
@@ -78,6 +93,7 @@ namespace DNSPropChecker
                         Console.WriteLine("  Exception Message: " + e.Message);
                     }
                 }
+                // Process CNAME Record
                 else if (queryType.Equals("CNAME", StringComparison.OrdinalIgnoreCase))
                 {
                     try
