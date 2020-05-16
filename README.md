@@ -6,7 +6,6 @@ Very alpha version
 - no exception
 - no test script
 
-[![Version](https://badge.fury.io/gh/fordantitrust%2FDNSPropChecker.svg)](https://github.com/fordantitrust/DNSPropChecker/releases)
 ![Build and Release App](https://github.com/fordantitrust/DNSPropChecker/workflows/Build%20and%20Release%20App/badge.svg?branch=release)
 
 [![Preview of DNSPropChecker][preview_image]][preview_image_url]
