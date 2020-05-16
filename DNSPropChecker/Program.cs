@@ -39,19 +39,21 @@ namespace DNSPropChecker
             // Type Query Type: A or CNAME
             Console.WriteLine("Enter Query Type [A or CNAME]:");
 
-            string queryType = Console.ReadLine();            
+            string queryType = Console.ReadLine();           
 
             // Process
             foreach (var dns in dnsList)
             {
                 Console.WriteLine("Provider: [" + dns.GetSection("Country").Value + "]" + dns.GetSection("Name").Value +  " = " + dns.GetSection("IP").Value);
 
-                IPAddress ipaddress = IPAddress.Parse(dns.GetSection("IP").Value);
+                IPAddress nameServerIpaddress = IPAddress.Parse(dns.GetSection("IP").Value);
 
-                var lookup = new LookupClient(ipaddress);
-                lookup.Timeout = TimeSpan.FromSeconds(5);
+                var options = new LookupClientOptions(nameServerIpaddress);
+                options.Timeout = TimeSpan.FromSeconds(2);
 
-                if (queryType.Equals("A"))
+                var lookup = new LookupClient(options);
+
+                if (queryType.Equals("A", StringComparison.OrdinalIgnoreCase))
                 {
                     try
                     {
@@ -72,10 +74,11 @@ namespace DNSPropChecker
                     }
                     catch (Exception e)
                     {
+                        Console.WriteLine(e.Message);
                         Console.WriteLine("  Answer IP: error");
                     }
                 }
-                else if (queryType.Equals("CNAME"))
+                else if (queryType.Equals("CNAME", StringComparison.OrdinalIgnoreCase))
                 {
                     try
                     {
