@@ -73,9 +73,9 @@ namespace DNSPropChecker
                         }                        
                     }
                     catch (Exception e)
-                    {
-                        Console.WriteLine(e.Message);
-                        Console.WriteLine("  Answer IP: error");
+                    {                                                                                
+                        Console.WriteLine("  Answer IP: Exception");
+                        Console.WriteLine("  Exception Message: " + e.Message);
                     }
                 }
                 else if (queryType.Equals("CNAME", StringComparison.OrdinalIgnoreCase))
@@ -99,7 +99,8 @@ namespace DNSPropChecker
                     }
                     catch (Exception e)
                     {
-                        Console.WriteLine("  Answer IP: error");
+                        Console.WriteLine("  Answer Canonical Name: Exception");
+                        Console.WriteLine("  Exception Message: " + e.Message);
                     }
                 }
             }
