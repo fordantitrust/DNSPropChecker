@@ -17,11 +17,5 @@ jobs:
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: 3.1.101
-    - name: Install dependencies
-      run: dotnet restore
-    - name: Build
-      run: dotnet build --configuration Release --no-restore
-    - name: Pack
-      run: dotnet pack --configuration Release
-    - name: Push
-      run: dotnet nuget push "bin/Release/DNSPropChecker.1.0.0.nupkg" --source "github"
+    - name: Build Release
+      run: dotnet publish -c Release -r win-x64 --framework netcoreapp3.1 --self-contained true -p:PublishSingleFile=true -p:PublishTrimmed=true
