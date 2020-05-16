@@ -10,6 +10,8 @@ Very alpha version
 
 ## Third-party
 
+* .NET Core 3.1 ([MIT License](https://github.com/dotnet/core/blob/master/LICENSE.TXT))
+* .NET Extensions ([MIT License](https://github.com/dotnet/extensions/blob/master/LICENSE.txt))
 * DnsClient.NET ([Apache License 2.0](https://github.com/MichaCo/DnsClient.NET/blob/dev/LICENSE))
 
 ## License
